@@ -34,7 +34,8 @@ app.get('*', (req, res) => {
 //===========================================================
 
 // const MONGODB_URI = `mongodb://localhost/jobfinder`;
-const MONGODB_URI = `mongodb://heroku_n2gj9bh5:of89mtqo97mebfdt5a5k7v7iih@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
+// const MONGODB_URI = `mongodb://heroku_n2gj9bh5:of89mtqo97mebfdt5a5k7v7iih@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
+const MONGODB_URI = `mongodb://cid4mean_op:ChingHai99@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
 
 mongoose.connect(MONGODB_URI);
 const db = mongoose.connection;
