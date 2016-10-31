@@ -1,0 +1,31 @@
+{
+  "name": "CID4MEAN",
+  "version": "0.0.1",
+  "description": "Continuous Integration and Deployment for MEAN Stacks",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanJui/CID_for_MEAN.git"
+  },
+  "keywords": [
+    "MEAN",
+    "heroku"
+  ],
+  "author": "AlanJui <alanjui.1960@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanJui/CID_for_MEAN/issues"
+  },
+  "homepage": "https://github.com/AlanJui/CID_for_MEAN#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9"
+  }
+}
