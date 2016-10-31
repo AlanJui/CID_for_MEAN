@@ -16,6 +16,6 @@ app.get('*', (req, res) => {
 
 const port = app.get('port');
 const ip = app.get('ip');
-app.listen(ip, port, function () {
+app.listen(port, function () {
   console.log(`Server is listening on http://${ip}:${port}`);
 });
