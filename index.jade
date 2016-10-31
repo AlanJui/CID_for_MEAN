@@ -1,1 +1,8 @@
-div hi
+link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+
+script(src='/lib/angular/angular.min.js')
+script(src='/app/app.js')
+
+body(ng-app='app')
+  div(ng-controller='testCtrl as vm')
+    div {{vm.test}}
