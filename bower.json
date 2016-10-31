@@ -1,0 +1,25 @@
+{
+  "name": "CID4MEAN",
+  "description": "Continuous Integration and Deployment for MEAN Stacks",
+  "main": "index.js",
+  "authors": [
+    "AlanJui <alanjui.1960@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "MEAN"
+  ],
+  "homepage": "https://github.com/AlanJui/CID_for_MEAN",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular": "^1.5.8"
+  }
+}
