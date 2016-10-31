@@ -4,5 +4,10 @@ script(src='/lib/angular/angular.min.js')
 script(src='/app/app.js')
 
 body(ng-app='app')
-  div(ng-controller='testCtrl as vm')
-    div {{vm.test}}
+  .container
+    h1 Find a Job Today!
+    div(ng-controller='testCtrl as vm')
+      .list-group
+        a.list-group-item(href='#', ng-repeat='job in vm.jobs')
+          h4.list-group-item-heading {{job.title}}
+          p.list-group-item-text {{job.description}}
