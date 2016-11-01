@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const dbCtrl = require('./dbController');
 const JobModel = require('./models/Job');
 
 const app = express();
@@ -18,8 +19,8 @@ app.use(express.static(`${__dirname}/public`));
  * API
  */
 app.get('/api/jobs', (req, res) => {
-  JobModel.find({})
-    .exec((err, jobs) => {
+  dbCtrl.findJobs()
+    .then((jobs) => {
       res.send(jobs);
     });
 });
@@ -33,17 +34,21 @@ app.get('*', (req, res) => {
 
 //===========================================================
 
+/**
+ * Connect to DB Server
+ * Heroku => MONGODB_URI = `mongodb://heroku_n2gj9bh5:of89mtqo97mebfdt5a5k7v7iih@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
+ */
 const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
-// const MONGODB_URI = `mongodb://heroku_n2gj9bh5:of89mtqo97mebfdt5a5k7v7iih@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
-
 const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
-mongoose.connect(mongodbUri);
-const db = mongoose.connection;
-db.once('open', () => {
-  console.log('Connected to MongoDB successfully!');
-  JobModel.seedJobs();
-});
+dbCtrl.connectDB(mongodbUri)
+  .then(() => {
+    console.log('Connected to MongoDB successfully!');
+    dbCtrl.seedJobs();
+  });
 
+/**
+ * Connect to Web/API Server
+ */
 const port = app.get('port');
 const ip = app.get('ip');
 app.listen(port, function () {

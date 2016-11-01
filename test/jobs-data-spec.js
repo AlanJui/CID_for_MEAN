@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
 const JobModel = require('../models/Job');
+const dbCtrl = require('../dbController');
 
 const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
 const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
@@ -30,19 +31,31 @@ function importTestData() {
   });
 }
 
-function findJobs(query) {
-  return Promise.cast(JobModel.find(query).exec());
-}
-
 describe('Get Jobs', () => {
-  it('should never be empty since jobs are seeded', (done) => {
-    connectDB(mongodbUri)
+
+  let jobs;
+
+  before((done) => {
+    dbCtrl.connectDB(mongodbUri)
       .then(resetDB())
-      .then(importTestData())
-      .then(findJobs)
-      .then((jobs) => {
-        expect(jobs.length).to.be.at.least(1);
+      // .then(importTestData())
+      .then(dbCtrl.seedJobs)
+      .then(dbCtrl.findJobs)
+      .then((collection) => {
+        jobs = collection;
         done();
       });
+  });
+
+  it('should never be empty since jobs are seeded', () => {
+    expect(jobs.length).to.be.at.least(1);
+  });
+
+  it('should have a job with a title', () => {
+    expect(jobs[0].title).to.not.be.empty;
+  });
+
+  it('should have a job with a description', () => {
+    expect(jobs[0].description).to.not.be.empty;
   });
 });
