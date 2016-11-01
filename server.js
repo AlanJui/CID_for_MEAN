@@ -1,8 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
 
 const dbCtrl = require('./dbController');
-const JobModel = require('./models/Job');
 
 const app = express();
 
