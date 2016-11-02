@@ -2,19 +2,41 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
-const JobModel = require('./../models/Job');
+const JobModel = require('./job/job.model');
 
-const createSeeds = Promise.promisify(JobModel.create, {
+const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
+const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
+
+const connectDB = Promise.promisify(mongoose.connect, {
+  context: mongoose
+});
+
+const createJob = Promise.promisify(JobModel.create, {
   context: JobModel
 });
 
 const findJobs = (query) => {
-  return Promise.cast(JobModel.find(query).exec());
+  if (query) {
+    return Promise.cast(JobModel.find(query).exec());
+  }
+  else {
+    return Promise.cast(JobModel.find({}).exec());
+  }
 };
 
-exports.connectDB = Promise.promisify(mongoose.connect, {
-  context: mongoose
-});
+exports.connectDB = () => {
+  return connectDB(mongodbUri);
+};
+
+exports.closeConnection = () => {
+  mongoose.connection.close();
+};
+
+exports.findJobs = findJobs;
+
+exports.saveJob = (job) => {
+  return createJob(job);
+};
 
 exports.seedJobs = () => {
   const jobs = [
@@ -27,11 +49,15 @@ exports.seedJobs = () => {
   return findJobs({}).then((collection) => {
     if (collection.length === 0) {
       return Promise.map(jobs, (job) => {
-        return JobModel.create(job);
+        return createJob(job);
       });
     }
   });
 };
 
-exports.findJobs = findJobs;
+exports.resetJobs = () => {
+  return new Promise((resolve, reject) => {
+    mongoose.connection.collections['jobs'].drop(resolve, reject);
+  });
+};
 

@@ -40,9 +40,14 @@ app.get('*', (req, res) => {
  * Connect to DB Server
  * Heroku => MONGODB_URI = `mongodb://heroku_n2gj9bh5:of89mtqo97mebfdt5a5k7v7iih@ds139327.mlab.com:39327/heroku_n2gj9bh5`;
  */
-const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
-const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
-dbCtrl.connectDB(mongodbUri)
+// const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
+// const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
+// dbCtrl.connectDB(mongodbUri)
+//   .then(() => {
+//     console.log('Connected to MongoDB successfully!');
+//     dbCtrl.seedJobs();
+//   });
+dbCtrl.connectDB()
   .then(() => {
     console.log('Connected to MongoDB successfully!');
     dbCtrl.seedJobs();
