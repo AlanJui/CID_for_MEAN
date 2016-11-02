@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
-const JobModel = require('./models/Job');
+const JobModel = require('./../models/Job');
 
 const createSeeds = Promise.promisify(JobModel.create, {
   context: JobModel

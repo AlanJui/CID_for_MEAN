@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
 const JobModel = require('../models/Job');
-const dbCtrl = require('../dbController');
+const dbCtrl = require('../api/dbController');
 
 const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
 const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;

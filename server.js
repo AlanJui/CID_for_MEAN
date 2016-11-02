@@ -1,6 +1,6 @@
 const express = require('express');
 
-const dbCtrl = require('./dbController');
+const dbCtrl = require('./api/dbController');
 
 const app = express();
 
@@ -13,15 +13,19 @@ app.set('view engine', 'jade');
 app.use(express.static(`${__dirname}/public`));
 
 //===========================================================
+
 /**
  * API
  */
-app.get('/api/jobs', (req, res) => {
-  dbCtrl.findJobs()
-    .then((jobs) => {
-      res.send(jobs);
-    });
-});
+
+// app.get('/api/jobs', (req, res) => {
+//   dbCtrl.findJobs()
+//     .then((jobs) => {
+//       res.send(jobs);
+//     });
+// });
+
+require('./api/job/jobs-service')(dbCtrl, app);
 
 /**
  * Serve Web Page
