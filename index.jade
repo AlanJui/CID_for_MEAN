@@ -8,8 +8,16 @@ script(src='/app/jobs.js')
 
 body(ng-app='myApp')
   .container
-    h1 Find a Job Today!
     div(ng-controller='testCtrl as vm')
+      h1 Post a New Job
+      form(ng-submit='vm.submit()')
+        .form-group
+          input.form-control(placeholder='Title', ng-model='vm.title')
+        .form-group
+          textarea.form-control(placeholder='Description', ng-model='vm.description')
+        .form-group
+          button.btn.btn-primary(type='submit') Post
+      h1 Find a Job Today!
       .list-group
         a.list-group-item(href='#', ng-repeat='job in vm.jobs')
           h4.list-group-item-heading {{job.title}}

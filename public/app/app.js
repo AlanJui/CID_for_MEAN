@@ -8,8 +8,12 @@ angular.module('myApp')
 
     vm.jobs = $resource('/api/jobs').query();
 
-    jobs.save({
-      title: 'test title',
-      description: 'test description'
-    });
+    vm.submit = function () {
+      var job = {
+        title: vm.title,
+        description: vm.description
+      };
+      jobs.save(job);
+      vm.jobs.push(job);
+    };
   });

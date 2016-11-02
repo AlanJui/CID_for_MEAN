@@ -1,12 +1,12 @@
 {
   "name": "CID4MEAN",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Continuous Integration and Deployment for MEAN Stacks",
   "main": "index.js",
   "scripts": {
     "db": "mongod --bind_ip=$IP --dbpath=data --nojournal --rest \"$@\"",
     "start": "node server.js",
-    "test": "echo \"Run Unit Test: \" && mocha test/server"
+    "test": "echo \"Run Server Site Unit Test: \" && mocha test/server && echo \"Run Client Site Unit Test: \" &&  karma start"
   },
   "repository": {
     "type": "git",
