@@ -1,5 +1,7 @@
+'use strict';
+
 angular.module('myApp')
-  .factory('jobs', [
+  .factory('Jobs', [
     '$resource',
     function ($resource) {
       return $resource('/api/jobs');

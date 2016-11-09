@@ -3,7 +3,6 @@ const app = express();
 const expect = require('chai').expect;
 const request = require('supertest');
 const Promise = require('bluebird');
-const dbCtrl = require('../../api/dbController');
 
 /**
  * Mockup DB Service for Testing
@@ -20,7 +19,7 @@ let db = {  // Mockup Database
     dataSavedJob = job;
   }
 };
-const jobService = require('../../api/job/jobs-service')(db, app);
+const jobService = require('.././job/jobs-service')(db, app);
 
 //==============================================================
 

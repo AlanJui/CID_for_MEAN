@@ -19,7 +19,7 @@ module.exports = function(config) {
       'public/lib/angular-resource/angular-resource.js',
       'public/lib/angular-mocks/angular-mocks.js',
       'test/app-test-init.js',
-      'public/app/**/*.js',
+      'public/scripts/**/*.js',
       'test/app/**/*.js'
     ],
 

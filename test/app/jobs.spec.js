@@ -1,4 +1,4 @@
-describe('Posting Jobs', function () {
+describe('POST /api/jobs', function () {
 
   let postRequestJob;
   const newJob = {
@@ -6,9 +6,10 @@ describe('Posting Jobs', function () {
     description: 'test description'
   };
 
+  // Load App Module
   beforeEach(module('myApp'));
 
-  it('should call POST /api/jobs with job data', inject(function ($httpBackend, jobs) {
+  it('should post a job to DB and saved', inject(function ($httpBackend, Jobs) {
 
     $httpBackend.whenPOST('/api/jobs', function(data) {
       postRequestJob = JSON.parse(data);
@@ -16,7 +17,7 @@ describe('Posting Jobs', function () {
       return true;
     }).respond(200);
 
-    jobs.save(newJob);
+    Jobs.save(newJob);
     $httpBackend.flush();
   }));
 });

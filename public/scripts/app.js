@@ -1,9 +1,11 @@
+'use strict';
+
 angular.module('myApp', [
   'ngResource'
 ]);
 
 angular.module('myApp')
-  .controller('testCtrl', function ($resource, jobs) {
+  .controller('MainCtrl', function ($resource, Jobs) {
     var vm = this;
 
     vm.jobs = $resource('/api/jobs').query();
@@ -13,7 +15,7 @@ angular.module('myApp')
         title: vm.title,
         description: vm.description
       };
-      jobs.save(job);
+      Jobs.save(job);
       vm.jobs.push(job);
     };
   });

@@ -1,4 +1,7 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const morgan = require('morgan');
 
 const dbCtrl = require('./api/dbController');
 
@@ -7,10 +10,17 @@ const app = express();
 app.set('port', (process.env.PORT || 3000));
 app.set('ip', (process.env.IP || '127.0.0.1'));
 
-app.set('views', __dirname);
-app.set('view engine', 'jade');
+const rootPath = path.normalize(`${__dirname}/..`)
+app.set('appPath', path.join(rootPath, 'public'));
+app.use(express.static(app.get('appPath')));
+app.use(morgan('dev'));
 
-app.use(express.static(`${__dirname}/public`));
+app.set('views', `${rootPath}/server/views`);
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //===========================================================
 
@@ -30,9 +40,13 @@ require('./api/job/jobs-service')(dbCtrl, app);
 /**
  * Serve Web Page
  */
-app.get('*', (req, res) => {
- res.render('index');
-});
+// app.get('*', (req, res) => {
+//  res.render('./views/index');
+// });
+app.route('/*')
+  .get((req, res) => {
+    res.sendFile(`${rootPath}/public/index.html`);
+  });
 
 //===========================================================
 
@@ -61,3 +75,6 @@ const ip = app.get('ip');
 app.listen(port, function () {
   console.log(`Server is listening on http://${ip}:${port}`);
 });
+
+// Expose app
+module.exports = app;

@@ -46,7 +46,7 @@ crashlytics-build.properties
 fabric.properties
 
 
-bower_componments
+public/bower_components/
 *~
 *.vpp~1
 Thumbs.db
@@ -69,3 +69,6 @@ npm-debug.log
 # Docker
 Dockerfile
 docker-compose.yml
+
+.tmp/
+dist/
