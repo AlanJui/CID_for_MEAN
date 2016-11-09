@@ -3,15 +3,6 @@
   "version": "0.1.0",
   "description": "Continuous Integration and Deployment for MEAN Stacks",
   "main": "index.js",
-  "scripts": {
-    "db": "mongod --bind_ip=127.0.0.1 --dbpath=data --nojournal",
-    "db-ip": "export IP=127.0.0.1  && mongod --bind_ip=$IP --dbpath=data --nojournal --rest \"$@\"",
-    "start": "node server/server.js",
-    "test": "echo \"Run Server Site Unit Test: \" && mocha test/server && echo \"Run Client Site Unit Test: \" &&  karma start"
-  },
-  "bin": {
-    "mocha": "./node_modules/mocha/bin/mocha"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlanJui/CID_for_MEAN.git"
@@ -26,8 +17,18 @@
     "url": "https://github.com/AlanJui/CID_for_MEAN/issues"
   },
   "homepage": "https://github.com/AlanJui/CID_for_MEAN#readme",
+  "scripts": {
+    "db": "mongod --bind_ip=127.0.0.1 --dbpath=data --nojournal",
+    "db-ip": "export IP=127.0.0.1  && mongod --bind_ip=$IP --dbpath=data --nojournal --rest \"$@\"",
+    "start": "node server/server.js",
+    "test": "echo \"Run Server Site Unit Test: \" && mocha test/server && echo \"Run Client Site Unit Test: \" &&  karma start"
+  },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "6.6.0",
+    "npm": "3.10.3"
+  },
+  "bin": {
+    "mocha": "./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
