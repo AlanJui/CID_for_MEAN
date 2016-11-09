@@ -1,6 +1,6 @@
 describe('POST /api/jobs', function () {
 
-  let postRequestJob;
+  var postRequestJob;
   const newJob = {
     title: 'test title',
     description: 'test description'
