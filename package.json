@@ -22,11 +22,10 @@
     "npm": "3.10.3"
   },
   "bin": {
-    "mocha": "./node_modules/mocha/bin/mocha",
-    "bower": "./node_modules/bower/bin/bower"
+    "mocha": "./node_modules/mocha/bin/mocha"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
+    "postinstall": "bower install",
     "db": "mongod --bind_ip=127.0.0.1 --dbpath=data --nojournal",
     "db-ip": "export IP=127.0.0.1  && mongod --bind_ip=$IP --dbpath=data --nojournal --rest \"$@\"",
     "start": "node server/server.js",
