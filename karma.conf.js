@@ -18,15 +18,15 @@ module.exports = function(config) {
       'public/bower_components/angular/angular.js',
       'public/bower_components/angular-resource/angular-resource.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
-      'test/app-test-init.js',
+      // 'test/app-test-init.js',
       'public/scripts/**/*.js',
-      'test/app/**/*.js'
+      'test/client/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      'public/scripts/app.js'
+      // 'public/scripts/app.js'
     ],
 
 
