@@ -15,9 +15,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'public/lib/angular/angular.js',
-      'public/lib/angular-resource/angular-resource.js',
-      'public/lib/angular-mocks/angular-mocks.js',
+      'public/bower_components/angular/angular.js',
+      'public/bower_components/angular-resource/angular-resource.js',
+      'public/bower_components/angular-mocks/angular-mocks.js',
       'test/app-test-init.js',
       'public/scripts/**/*.js',
       'test/app/**/*.js'
@@ -26,7 +26,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'public/app/app.js'
+      'public/scripts/app.js'
     ],
 
 

@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
-const dbCtrl = require('.././dbController');
+const dbCtrl = require('../../server/api/dbController');
 
 describe('DB Service for Job', () => {
 

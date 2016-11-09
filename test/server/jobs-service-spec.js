@@ -19,7 +19,7 @@ let db = {  // Mockup Database
     dataSavedJob = job;
   }
 };
-const jobService = require('.././job/jobs-service')(db, app);
+const jobService = require('../../server/api/job/jobs-service')(db, app);
 
 //==============================================================
 
