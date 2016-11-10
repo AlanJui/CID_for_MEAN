@@ -8,6 +8,7 @@ var lazypipe = require('lazypipe');
 var rimraf = require('rimraf');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
+var karmaServer = require('karma').Server;
 
 var yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -19,12 +20,12 @@ var paths = {
   styles: [yeoman.app + '/styles/**/*.scss'],
   test: ['test/spec/**/*.js'],
   testRequire: [
-    yeoman.app + '/public/bower_components/angular/angular.js',
-    yeoman.app + '/public/bower_components/angular-mocks/angular-mocks.js',
-    yeoman.app + '/public/bower_components/angular-resource/angular-resource.js',
-    yeoman.app + '/public/bower_components/angular-cookies/angular-cookies.js',
-    yeoman.app + '/public/bower_components/angular-sanitize/angular-sanitize.js',
-    yeoman.app + '/public/bower_components/angular-route/angular-route.js',
+    yeoman.app + '/bower_components/angular/angular.js',
+    yeoman.app + '/bower_components/angular-mocks/angular-mocks.js',
+    yeoman.app + '/bower_components/angular-resource/angular-resource.js',
+    yeoman.app + '/bower_components/angular-cookies/angular-cookies.js',
+    yeoman.app + '/bower_components/angular-sanitize/angular-sanitize.js',
+    yeoman.app + '/bower_components/angular-route/angular-route.js',
     'test/mock/**/*.js',
     'test/spec/**/*.js'
   ],
@@ -127,13 +128,19 @@ gulp.task('serve:prod', function() {
   });
 });
 
-gulp.task('test', ['start:server:test'], function () {
-  var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
-  return gulp.src(testToFiles)
-    .pipe($.karma({
-      configFile: paths.karma,
-      action: 'watch'
-    }));
+gulp.task('test', ['start:server:test'], function (done) {
+  // var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
+  // return gulp.src(testToFiles)
+  //   .pipe($.karma({
+  //     configFile: paths.karma,
+  //     action: 'watch'
+  //   }));
+
+  new karmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: false
+  }, done).start();
+
 });
 
 // inject bower components

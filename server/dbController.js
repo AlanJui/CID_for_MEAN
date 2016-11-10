@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
-const JobModel = require('./job/job.model.js');
+const JobModel = require('./api/job/job.model.js');
 
 const LOCAL_MONGODB_URI = `mongodb://localhost/jobfinder`;
 const mongodbUri = process.env.MONGODB_URI || LOCAL_MONGODB_URI;
@@ -16,6 +16,25 @@ const connectDB = Promise.promisify(mongoose.connect, {
 const createJob = Promise.promisify(JobModel.create, {
   context: JobModel
 });
+
+//----------------------------------------------------------
+
+exports.handleError = (res, statusCode) => {
+  statusCode = statusCode || 500;
+  return (err) => {
+    res.status(statusCode).send(err);
+  };
+};
+
+exports.respondWithResult = (res, statusCode) => {
+  statusCode = statusCode || 200;
+  return (entity) => {
+    if (entity) {
+      return res.status(statusCode).json(entity);
+    }
+    return null;
+  };
+};
 
 //----------------------------------------------------------
 

@@ -3,11 +3,11 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
-const dbCtrl = require('../../server/api/dbController');
+const dbCtrl = require('../../server/dbController');
 
-describe('DB Service for Job', () => {
+describe.skip('DB Controller', () => {
 
-  describe('Get Jobs', () => {
+  describe('Initial Test Data', () => {
 
     let jobs;
 
@@ -40,7 +40,7 @@ describe('DB Service for Job', () => {
 
   });
 
-  describe('Save Jobs', () => {
+  describe('Save Job', () => {
 
     const job = {
       title: 'Cook',
