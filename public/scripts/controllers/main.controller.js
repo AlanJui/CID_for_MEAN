@@ -15,7 +15,7 @@ angular.module('myApp')
     vm.jobs = $resource(API_URL + '/jobs').query();
 
     var getItemIndex = function (item, list) {
-      let index = list.indexOf(item);
+      var index = list.indexOf(item);
       return index;
     };
 
@@ -33,12 +33,12 @@ angular.module('myApp')
 
     vm.deleteItem = function (job) {
       Job.delete({id: job._id});
-      let index = getItemIndex(job, vm.jobs);
+      var index = getItemIndex(job, vm.jobs);
       vm.jobs.splice(index, 1);
     };
 
     vm.showItem = function (job) {
-      editIndex = getItemIndex(job, vm.jobs);;
+      editIndex = getItemIndex(job, vm.jobs);
       console.log('editIndex = ' + editIndex);
       editItem = Object.create(job);
       vm.job = editItem;
