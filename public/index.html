@@ -50,35 +50,7 @@
 
     <div class="container">
     <!--<div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>-->
-      <div ng-controller="MainCtrl as vm">
-        <h1>Post a New Job</h1>
-        <form ng-submit="vm.submit()">
-          <div class="form-group">
-            <input type="text" class="form-control"
-                   ng-model="vm.title"
-                   placeholder="Title">
-          </div>
-          <div class="form-group">
-            <textarea ng-model="vm.description"
-                      cols="30" rows="5" class="form-control">
-            </textarea>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary" type="submit">
-              Post
-            </button>
-          </div>
-        </form>
-
-        <h1>Find a Job Today!</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item"
-             ng-repeat="job in vm.jobs">
-            <h4 class="list-group-item-heading">{{job.title}}</h4>
-            <p class="list-group-item-text">{{job.description}}</p>
-          </a>
-        </div>
-      </div>
+      <div ui-view></div>
     </div>
 
     <!--<div class="footer">-->
@@ -99,8 +71,9 @@
        ga('send', 'pageview');
     </script>
 
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -109,7 +82,9 @@
 
         <!-- build:js({.tmp,public}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/jobs.js"></script>
+        <script src="scripts/app.config.js"></script>
+        <script src="scripts/controllers/main.controller.js"></script>
+        <script src="scripts/services/job.resource.js"></script>
         <!-- endbuild -->
 </body>
 </html>

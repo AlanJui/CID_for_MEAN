@@ -1,0 +1,31 @@
+<h1>Post a New Job</h1>
+<form ng-submit="vm.submit()">
+  <div class="form-group">
+    <input type="text" class="form-control"
+           ng-model="vm.job.title"
+           placeholder="Job Title">
+  </div>
+  <div class="form-group">
+            <textarea cols="30" rows="5" class="form-control"
+                      ng-model="vm.job.description"
+                      placeholder="Description of Job">
+            </textarea>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">
+      Post
+    </button>
+  </div>
+</form>
+
+<h1>Job List</h1>
+<div class="list-group">
+  <a href="#" class="list-group-item"
+     ng-click="vm.showItem(job)"
+     ng-repeat="job in vm.jobs">
+    <button class="close" ng-click="vm.deleteItem(job)">x</button>
+    <h4 class="list-group-item-heading">{{job.title}}</h4>
+    <p class="list-group-item-text">{{job.description}}</p>
+  </a>
+</div>
+
