@@ -1,3 +1,4 @@
+const jsonPatch = require('fast-json-patch');
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
@@ -26,6 +27,16 @@ exports.handleError = (res, statusCode) => {
   };
 };
 
+exports.handleEntityNotFound = (res) => {
+  return (entity) => {
+    if (!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+};
+
 exports.respondWithResult = (res, statusCode) => {
   statusCode = statusCode || 200;
   return (entity) => {
@@ -34,6 +45,29 @@ exports.respondWithResult = (res, statusCode) => {
     }
     return null;
   };
+};
+
+exports.patchUpdates = (patches) => {
+  return (entity) => {
+    try {
+      jsonPatch.apply(entity, patches, /* validate */ true);
+    } catch(err) {
+      return Promise.reject(err);
+    }
+
+    return entity.save();
+  }
+};
+
+exports.removeEntity = (res) => {
+  return (entity) => {
+    if (entity) {
+      return entity.remove()
+        .then(() => {
+          res.status(204).end();
+        });
+    }
+  }
 };
 
 //----------------------------------------------------------
