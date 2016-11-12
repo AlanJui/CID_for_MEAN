@@ -5,10 +5,13 @@ angular.module('myApp', [
 ]);
 
 angular.module('myApp')
-  .controller('MainCtrl', function ($resource, Jobs) {
+
+  .constant('API_URL', 'http://localhost:3000/api')
+
+  .controller('MainCtrl', function ($resource, Jobs, API_URL) {
     var vm = this;
 
-    vm.jobs = $resource('/api/jobs').query();
+    vm.jobs = $resource(API_URL + '/jobs').query();
 
     vm.submit = function () {
       var job = {
