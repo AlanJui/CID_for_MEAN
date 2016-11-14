@@ -1,3 +1,6 @@
-// var app = angular.module('app', ['ngResource']);
+'use strict';
 
-angular.module('myApp', ['ngResource']);
+angular.module('myApp', [
+  'ui.router',
+  'ngResource'
+]);

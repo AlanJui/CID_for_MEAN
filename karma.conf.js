@@ -10,23 +10,47 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['jasmine'],
 
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-spec-reporter'),
+      require('karma-chrome-launcher'),
+      require('karma-phantomjs-launcher'),
+      require('karma-script-launcher'),
+      require('karma-coverage')
+    ],
+
+    coverageReporter: {
+      reporters: [
+        {
+          type: 'html', // produces a html document after code is run
+          subdir: 'public'
+        },
+        {
+          type: 'json',
+          subdir: '.',
+          file: 'client-coverage.json'
+        }
+      ],
+      dir: 'coverage/'   // path to created html doc
+    },
 
     // list of files / patterns to load in the browser
     files: [
       'public/bower_components/angular/angular.js',
-      'public/bower_components/angular-resource/angular-resource.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
+      'public/bower_components/angular-resource/angular-resource.js',
+      'public/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'public/bower_components/jquery/dist/jquery.js',
       'test/app-test-init.js',
       'public/scripts/**/*.js',
       'test/client/**/*.js'
     ],
 
-
     // list of files to exclude
     exclude: [
-      'public/scripts/app.js'
+      // 'public/scripts/app.js'
     ],
 
 
@@ -39,7 +63,8 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    // reporters: ['progress'],
+    reporters: ['spec', 'coverage'],
 
 
     // web server port

@@ -129,17 +129,17 @@ gulp.task('serve:prod', function() {
 });
 
 gulp.task('test', ['start:server:test'], function (done) {
-  // var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
-  // return gulp.src(testToFiles)
-  //   .pipe($.karma({
-  //     configFile: paths.karma,
-  //     action: 'watch'
-  //   }));
+  var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
+  return gulp.src(testToFiles)
+    .pipe($.karma({
+      configFile: paths.karma,
+      action: 'watch'
+    }));
 
-  new karmaServer({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: false
-  }, done).start();
+  // new karmaServer({
+  //   configFile: __dirname + '/karma.conf.js',
+  //   singleRun: false
+  // }, done).start();
 
 });
 

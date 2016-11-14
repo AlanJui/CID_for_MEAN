@@ -8,11 +8,14 @@
  * Factory in the myApp.
  */
 angular.module('myApp')
-  .factory('Job', [
-    '$resource',
-    'API_URL',
-    function ($resource, API_URL) {
-      return $resource(API_URL + '/jobs/:id', null, {
-        'update': { method: 'PUT' }
-      });
-    }]);
+  .factory('Job', function ($resource) {
+    var resource =  $resource('http://localhost:3000/api/jobs/:id', null, {
+      'update': { method: 'PUT' }
+    });
+
+    resource.getList = function (successCallback) {
+      return resource.query(successCallback);
+    };
+
+    return resource;
+  });

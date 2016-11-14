@@ -8,39 +8,44 @@
  * Controller of the myApp
  */
 angular.module('myApp')
-  .controller('MainCtrl', function ($state, $resource, Job, API_URL) {
-    var vm = this;
-    var editItem, editIndex;
+  .controller('MainCtrl', function (Job) {
 
-    vm.jobs = $resource(API_URL + '/jobs').query();
+      var self = this;
+      var editItem, editIndex;
 
-    var getItemIndex = function (item, list) {
-      var index = list.indexOf(item);
-      return index;
-    };
+      // Load data from DB by RESTful API
+      // Job.query().then(function (jobs) {
+      //   self.jobs = jobs;
+      // });
+      self.jobs = Job.query();
 
-    vm.submit = function () {
-      if (editItem) {
-        Job.update({id: editItem._id}, vm.job);
-        var item = Object.create(vm.job);
-        vm.jobs[editIndex] = item;
-      } else {
-        Job.save(vm.job);
-        vm.jobs.push(vm.job);
-      }
-      vm.job = {};
-    };
+      var getItemIndex = function (item, list) {
+        var index = list.indexOf(item);
+        return index;
+      };
 
-    vm.deleteItem = function (job) {
-      Job.delete({id: job._id});
-      var index = getItemIndex(job, vm.jobs);
-      vm.jobs.splice(index, 1);
-    };
+      self.submit = function () {
+        if (editItem) {
+          Job.update({id: editItem._id}, self.job);
+          var item = Object.create(self.job);
+          self.jobs[editIndex] = item;
+        } else {
+          Job.save(self.job);
+          self.jobs.push(self.job);
+        }
+        self.job = {};
+      };
 
-    vm.showItem = function (job) {
-      editIndex = getItemIndex(job, vm.jobs);
-      console.log('editIndex = ' + editIndex);
-      editItem = Object.create(job);
-      vm.job = editItem;
-    };
+      self.deleteItem = function (job) {
+        Job.delete({id: job._id});
+        var index = getItemIndex(job, self.jobs);
+        self.jobs.splice(index, 1);
+      };
+
+      self.showItem = function (job) {
+        editIndex = getItemIndex(job, self.jobs);
+        console.log('editIndex = ' + editIndex);
+        editItem = Object.create(job);
+        self.job = editItem;
+      };
   });
