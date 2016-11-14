@@ -33,9 +33,9 @@ describe('MainCtrl', function () {
   var mockService;
   var ctrl;
 
-  var list = jobList;
-
   beforeEach(module(function ($provide) {
+    var list = jobList;
+
     mockService = {
       query: function () {
         return list;
